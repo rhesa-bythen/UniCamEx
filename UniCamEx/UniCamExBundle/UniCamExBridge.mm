@@ -9,4 +9,16 @@ extern "C" {
         id<MTLTexture> tex = (__bridge id<MTLTexture>)(void*)mtlTexture;
         [uniCamExModel UniCamExSendWithTexture:tex];
     }
+
+    void UniCamExInstall() {
+        [uniCamExModel install];
+    }
+
+    void UniCamExUninstall() {
+        [uniCamExModel uninstall];
+    }
+
+    bool IsInstalled() {
+        return [uniCamExModel isInstalled];
+    }
 }

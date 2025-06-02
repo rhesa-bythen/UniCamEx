@@ -12,4 +12,16 @@ public class UniCamEx : NSObject {
     public func UniCamExSend(texture: MTLTexture) {
         uniCamExModel.onRecieveTexture(texture: texture)
     }
+    
+    public func install() {
+        uniCamExModel.uniCamExInstaller.install()
+    }
+
+    public func uninstall() {
+        uniCamExModel.uniCamExInstaller.uninstall()
+    }
+
+    public func isInstalled() -> Bool {
+        return uniCamExModel.checkInstallation()
+    }
 }

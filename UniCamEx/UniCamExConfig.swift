@@ -1,10 +1,10 @@
 struct UniCamExConfig {
     // You must match with Bundle Identifier of `Extension` in targets.
-    static let CAMERA_EXTENSION_ID = "jp.ikep.UniCamEx.Extension"
+    static let CAMERA_EXTENSION_ID = "ai.bythen.Studio.Extension"
     // Virtual camera name that you want to show in other camera applications.
-    static let VIRTUAL_CAMERA_NAME = "UniCamEx"
+    static let VIRTUAL_CAMERA_NAME = "bythen Virtual Cam"
     // You must change your random UUIDs.
-    static let DEVICE_ID = "939BF83F-40E8-45D5-9B20-8FBDF536D1A1"
-    static let VIDEO_ID = "30010C1C-93BF-11D8-8B5B-000A95AF9C6A"
-    static let SINK_STREAM_ID = "F8BB1C28-BAE8-11D6-9C31-00039315CD46"
+    static let DEVICE_ID = "AD296652-6526-4904-8C3B-A6650C1FFE11"
+    static let VIDEO_ID = "4EECD3B5-B446-42A4-BB21-0B0145C49C86"
+    static let SINK_STREAM_ID = "A2DEFA53-0C24-4D90-B44B-E7C9EE5C5FDC"
 }

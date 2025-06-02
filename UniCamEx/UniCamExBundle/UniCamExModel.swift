@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import AVFoundation
 import CoreMediaIO
 import os.log
@@ -15,6 +16,7 @@ public class UniCamExModel {
     
     public init() {
         uniCamExInstaller.install()
+        showAlert(text: "initialization")
         setup()
     }
     
@@ -32,33 +34,44 @@ public class UniCamExModel {
         shouldEnqueue = false
     }
     
-    private func setup(){
+    public func setup(){
         guard let cd = getCaptureDevice(name: UniCamExConfig.VIRTUAL_CAMERA_NAME) else {
-            print("no capture device")
+            showAlert(text: "no capture device")
             return
         }
         
         let deviceIDs = CoreMediaIOUtil.getDeviceIDs()
         if deviceIDs.isEmpty {
             print("deviceIDs is empty")
+            showAlert(text: "deviceIDs is empty")
             return
         }
-        print("deviceIDs: \(deviceIDs)")
+        showAlert(text: "deviceIDs: \(deviceIDs)")
         
         guard let deviceID = deviceIDs
             .first(where: { CoreMediaIOUtil.getDeviceUID(deviceID: $0) == cd.uniqueID }) else {
-            print("no math deviceID")
+            showAlert(text: "no math deviceID")
             return
         }
         print("deviceID: \(deviceID)")
         
         let streams = CoreMediaIOUtil.getStreams(deviceID: deviceID)
         if streams.count < 2 {
-            print("Streams is less than expected")
+            showAlert(text: "Streams is less than expected")
             return
         }
         startStream(deviceID: deviceID, streamID: streams[1])
     }
+    
+    public func checkInstallation() -> Bool {
+        guard let _ = getCaptureDevice(name: UniCamExConfig.VIRTUAL_CAMERA_NAME) else {
+            showAlert(text: "Virtual camera device not found")
+            return false
+        }
+        showAlert(text: "Virtual camera device is installed")
+        return true
+    }
+
     
     private func getCaptureDevice(name: String) -> AVCaptureDevice? {
         AVCaptureDevice
@@ -81,6 +94,8 @@ public class UniCamExModel {
         streamQueue = CoreMediaIOUtil.startStream(deviceID: deviceID, streamID: streamID, proc: proc, refCon: refCon)
         isStreaming = true
         shouldEnqueue = true
+        
+        showAlert(text: "STREAM STARTED")
     }
     
     private func alteredProc() {
